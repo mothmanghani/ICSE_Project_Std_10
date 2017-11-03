@@ -106,7 +106,7 @@ public class MiniSudoku_InTheTerminalWindow{
                 "\n  contains the digits from 1 to 4.",
                 "\n\n- Each row, column, and quadret(2x2 box) can contain any number\n from 1 to 4 only once.\n\n  ",
                 "Once you finish reading the instructions, press the enter key"};
-        gamePrint("\n                                                              Instructions\n");
+        gamePrint("\n                                                              Instructions");
         gamePrint("");
         printAllMembers(a);
         gamePrint("");
@@ -199,7 +199,7 @@ public class MiniSudoku_InTheTerminalWindow{
 
     public static void printGrid(String arr[], String chck[]){
         char a = 'a';
-        System.out.format("           %s   %s       %s   %s\n\n      %s", a++, a++, a++, a, getAscii(217));
+        System.out.format("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n           %s   %s       %s   %s\n\n      %s", a++, a++, a++, a, getAscii(217));
         printC_or_I(193, 190);
         System.out.printf("\n      %s           %s           %s",getAscii(178), getAscii(178), getAscii(178));
         for(int i = 0; i<arr.length; i++){
@@ -225,8 +225,7 @@ public class MiniSudoku_InTheTerminalWindow{
         gamePrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         double startTime = System.currentTimeMillis();
         outerLoop :
-        while(finCheck(arr) == false){
-            Scanner sc = new Scanner(System.in);
+        while(finCheck(arr) == false){;
             printGrid(arr, arc);
             gamePrint("\n\nEnter the coordinates of the number/space you wish to change\nin the 'numberLetter' format. Eg. '1a'"+
                 "\n\nTo read the instructions enter 'i'\nTo quit the game enter 'q'\nYou cannot change:\n");
@@ -253,17 +252,19 @@ public class MiniSudoku_InTheTerminalWindow{
                 if(runThru(c1, arc)==false){
                     int x = c1.charAt(1) - 97, y = c1.charAt(0) - 49;
                     System.out.println("Enter the number to replace the selected space/number");
-                    int c = sc.nextInt();
+                    int c;
                     try{
-                        for(int trial = 1; trail <= 4)
-                            c = trial;
+                        c = sc.nextInt();
+                        if(c>0 && c<5)
+                         c=c;
+                        else
+                         c/=0;
                         }
-                    catch(IOException e){
-                        System.out.println("Invalid input");
+                    catch(Exception e){
+                        System.out.println("Invalid input, press the 'enterKey'");
                         waitForEnterKey();
                         continue;}
-                        
-                    String temp = arr[y].substring(0,x) + c + arr[y].substring((x+1),4);
+                    String temp = arr[y].substring(0,x) + Integer.toString(c) + arr[y].substring((x+1),4);
                     arr[y]=temp;
                     gamePrint( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 }
