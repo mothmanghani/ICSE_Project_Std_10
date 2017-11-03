@@ -2,46 +2,55 @@
  * @author (Muhammad Othman Ghani)
  * @version (v 2.0)
  */
-package ICSE_Project;
 import java.util.*;
 public class MiniSudoku_InTheTerminalWindow{
-    public static void PrintSudokuArt2(){
-        System.out.println("     e    e        888   888b    |   888          ,d88``\\   888   |   888~-_       ,88~-_     888  /     888   |");  
-        System.out.println("    d8b  d8b       888   |Y88b   |   888          8888      888   |   888   \\     d888   \\    888 /      888   |");  
-        System.out.println("   d888bdY88b      888   | Y88b  |   888   ____   `Y88b     888   |   888    |   88888    |   888/\\      888   |");  
-        System.out.println("  / Y88Y Y888b     888   |  Y88b |   888           `Y88b,   888   |   888    |   88888    |   888  \\     888   |");  
-        System.out.println(" /   VV   Y888b    888   |   Y88b|   888             8888   Y88   |   888   /     Y888   /    888   \\    Y88   |");  
-        System.out.println("/          Y888b   888   |    Y888   888          \\__88P'    \"8__/    888_-~       `88_-~     888    \\    \\8__/ \n\n");  
-    }
+    public static void PrintSudokuArt(){
+        System.out.println("     e    e        888   888b    |   888          ,d88~~\\   888   |   888~-_       ,88~-_     888  /     888   |");
+        System.out.println("    d8b  d8b       888   |Y88b   |   888          8888      888   |   888   \\     d888   \\    888 /      888   |");
+        System.out.println("   d888bdY88b      888   | Y88b  |   888   ____   `Y88b     888   |   888    |   88888    |   888/\\      888   |");
+        System.out.println("  / Y88Y Y888b     888   |  Y88b |   888           `Y88b,   888   |   888    |   88888    |   888  \\     888   |");
+        System.out.println(" /   YY   Y888b    888   |   Y88b|   888             8888   Y88   |   888   /     Y888   /    888   \\    Y88   |");
+        System.out.println("/          Y888b   888   |    Y888   888          \\__88P'    \"8__/    888_-~       `88_-~     888    \\    \"8__/\n\n\n\n\n ");
+        }
+        
     public static void main(String[]args){
-        while(1==1){
+        outerLoop: while(true){
             Scanner sc = new Scanner(System.in);
             Random r = new Random();
             String gmnum[] = {"   1. Game #1", "2. Game #2", "3. Game #3", "4. Random Mode"};
-            String s[][] = {{"1234", "3412", "2341", "412_"}, {"__4_", "_2__", "___4", "__3_"}};
-            String scheck[][] = {{"1d", "2c", "3b", "4a"}, {"1c", "2b", "3d", "4c"}};
+            String presetPuzzle[][] = {{"1234", "3412", "2341", "412_"}, {"__4_", "_2__", "___4", "__3_"}};
+            String puzzleCheck[][] = {{"1d", "2c", "3c", "4a"}, {"1c", "2b", "3d", "4c"}, {"1c", "2d", "3a", "3c"}, {"1a", "2d", "3b", "4d"}};
             System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            PrintSudokuArt2();
-            System.out.printf(" Welcome to M I N I - S U D O K U!\n %s \n\n Please select any one of the following options\n\n  1. Play Game\n  2. About\n\n",
-                "_______________________________________________________________________________________________________________");
+            PrintSudokuArt();
+            System.out.printf(" Welcome to M I N I - S U D O K U!\n%s \n\n Please select any one of the following options\n\n  1. Play Game\n  2. About\n\n",
+                "________________________________________________________________________________________________________________________");
+            System.out.println("\n\n Enter 'e' to exit\n");
             String i = getInputLoop(1,'2');
+            if(i.charAt(0) == 'e')
+                break;
             if(i.compareTo("1") == 0){
                 System.out.println("\n Select any one of the following games:\n");
                 printAllMembers(gmnum);
                 System.out.println("\n\n Enter 'e' to exit\n");
                 char gamenumber = getInputLoop(1,'4').charAt(0);
-                if (gamenumber == 'e')
-                    continue;
-                if(gamenumber == '4')
-                    setAndRun(scheck[r.nextInt(2)]);
-                else
-                    playGame(s[gamenumber-49], scheck[gamenumber-49]);
+                switch(gamenumber){
+                    case 'e':{
+                        continue outerLoop;}
+                    case '4' :{
+                        setAndRun(puzzleCheck[r.nextInt(3)]);
+                        break;}
+                    default :{
+                        if(gamenumber ==  '1' || gamenumber ==  '2'|| gamenumber ==  '3')
+                        playGame(presetPuzzle[gamenumber-49], puzzleCheck[gamenumber-49]);
+                        else{
+                            System.out.println("Invalid input");waitForEnterKey();}
+                         break;}
+                    }
             }
             else if(i.compareTo("2") == 0){
-                System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                PrintSudokuArt2();
-                gamePrint("\n                                                       About                                                         ");
-                System.out.println("\n_______________________________________________________________________________________________________________\n The name Sudoku comes from Japan and consists of the Japanese characters"+
+                PrintSudokuArt();
+                gamePrint("\n                                                                 About\n");
+                System.out.println("________________________________________________________________________________________________________________________\n The name Sudoku comes from Japan and consists of the Japanese characters"+
                     "\n Su (meaning number), and Doku (meaning single) but the puzzle was not invented"+
                     "\n in Japan. Sudoku originated in Switzerland and then traveled to Japan through"+ 
                     "\n of the USA. Sudoku has its deep roots in ancient number puzzles.\n"+
@@ -50,9 +59,10 @@ public class MiniSudoku_InTheTerminalWindow{
                     "\n most people in under 2 minutes");
                 Instructions();
             }
+            else{ 
+            System.out.println("Invalid input"); waitForEnterKey();}
         }
     }
-
     public static final char[] EXTENDED = { 0x00C7, 0x00FC, 0x00E9, 0x00E2,
             0x00E4, 0x00E0, 0x00E5, 0x00E7, 0x00EA, 0x00EB, 0x00E8, 0x00EF,
             0x00EE, 0x00EC, 0x00C4, 0x00C5, 0x00C9, 0x00E6, 0x00C6, 0x00F4,
@@ -70,8 +80,9 @@ public class MiniSudoku_InTheTerminalWindow{
             0x221E, 0x03C6, 0x03B5, 0x2229, 0x2261, 0x00B1, 0x2265, 0x2264,
             0x2320, 0x2321, 0x00F7, 0x2248, 0x00B0, 0x2219, 0x00B7, 0x221A,
             0x207F, 0x00B2, 0x25A0, 0x00A0 };
-    public static void printC_or_I(int a, int b){
-        for (int n = 0; n <=22; n++){
+    public static void printC_or_I(int a, int b){//Corner or Intersection(with simple horizontal lines in between)
+        for (int n = 0; n <=22; n++){//'n' is a variable to store the number of characters already printed 
+            //on the screen, 22 being the limit
             if(n==11)
                 System.out.printf("%s", getAscii(a));
             else
@@ -81,7 +92,7 @@ public class MiniSudoku_InTheTerminalWindow{
         }
     }
 
-    public static final char getAscii(int code) {
+    public static final char getAscii(int code) {//used to print extended ASCII code of charValue 'code'
         if (code >= 0x80 && code <= 0xFF) {
             return EXTENDED[code - 0x7F];
         }
@@ -90,36 +101,38 @@ public class MiniSudoku_InTheTerminalWindow{
 
     public static void Instructions(){
         String a[] = {"How to Play  M I N I   S U D O K U.",
-                "\n- The objective is to fill a 4x4 grid so that each column, each row, ",
+                "\n\n- The objective is to fill a 4x4 grid so that each column, each row, ",
                 "\n  and each of the four 2x2 boxes (also called blocks or regions)",
                 "\n  contains the digits from 1 to 4.",
-                "\n- Each row, column, and quadret(2x2 box) can contain any number\n from 1 to 4 only once.\n\n  ",
-                "          Once you finish reading the instructions, press the enter key"};
-        gamePrint("\n                                                    Instructions");
+                "\n\n- Each row, column, and quadret(2x2 box) can contain any number\n from 1 to 4 only once.\n\n  ",
+                "Once you finish reading the instructions, press the enter key"};
+        gamePrint("\n                                                              Instructions\n");
         gamePrint("");
         printAllMembers(a);
         gamePrint("");
         waitForEnterKey();
     }
 
-    public static boolean runThru(String s, String arr[]){
+    public static boolean runThru(String coOrdinate, String arr[]){//checks if coordinates on grid,'coOrdinate' are vaalid by
+        //comparing them to members of array 'arr[]'
         for(int i = 0; i<arr.length; i++){
-            if (s.compareTo(arr[i]) == 0)
+            if (coOrdinate.compareTo(arr[i]) == 0)
                 return true;
         }
         return false;
     }
 
-    public static void gamePrint(String s){
-        System.out.println("\n_______________________________________________________________________________________________________________\n" +s);
+    public static void gamePrint(String s){//simply prints a line followed by some text 'String s'
+        System.out.println("\n________________________________________________________________________________________________________________________\n" +s);
     }
 
-    public static void printAllMembers(String s[]){
+    public static void printAllMembers(String s[]){//prints all memebers of array 'String s[]'
         for(int i = 0; i<s.length; i++)
             System.out.print("  "+s[i]);
     }
 
-    public static String getInputLoop(int a, char c){
+    public static String getInputLoop(int a, char c){//A loop that manages a majority of the inputs concerned with
+        //the completion of the game, handling most errors.
         String s = "";
         while(true){
             Scanner sc = new Scanner(System.in);
@@ -138,7 +151,7 @@ public class MiniSudoku_InTheTerminalWindow{
 
     public static void waitForEnterKey(){
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
+        String zeroConsequence = sc.nextLine();
     }
 
     public static int giveFrequency(char a, String s){
@@ -151,28 +164,26 @@ public class MiniSudoku_InTheTerminalWindow{
     }
 
     public static boolean finCheck(String arr[]){
-        double s1 = 0, s2 = 0, p1 = 1, p2 =1;
-        for(int a = 0; a<arr.length ;a++){
-            //'a' = row/column
-            for(int b = 0; b <arr.length; b++){
-                //'b' = column/row
-                s1 += (arr[a].charAt(b) - 48);
-                s2 += (arr[b].charAt(a) - 48);
-                p1 *= (arr[a].charAt(b) - 48);
-                p2 *= (arr[b].charAt(a) - 48);
+        double sumRows = 0, sumColumns = 0, productRows = 1, productColumns =1;
+        for(int rowColumn = 0; rowColumn < arr.length ; rowColumn++){
+            for(int columnRow = 0; columnRow < arr.length; columnRow++){
+                sumRows += (arr[rowColumn].charAt(columnRow) - 48);
+                sumColumns += (arr[columnRow].charAt(rowColumn) - 48);
+                productRows *= (arr[rowColumn].charAt(columnRow) - 48);
+                productColumns *= (arr[columnRow].charAt(rowColumn) - 48);
             }}
-        if (s1==s2 && s1 == 40 && p1==p2 && p1== 24*24*24*24)
+        if (sumRows==sumColumns && sumRows == 40 && productRows==productColumns && productRows== 24*24*24*24)
             return true;
         return false;
     }
 
-    public static void printLine(String arr, int r, String chck[]){
-        System.out.format("\n %d    %s  ",(r+1),getAscii(178));
+    public static void printLine(String arr, int lineNumber, String chck[]){
+        System.out.format("\n %d    %s  ",(lineNumber+1),getAscii(178));
         for(int i = 0; i< arr.length(); i++){
             char x = 'a', y = '1';
             for(int a = 0; a < i;a++)
                 x++;
-            for(int a = 0; a < r;a++)
+            for(int a = 0; a < lineNumber;a++)
                 y++;
             String c = ""+y+x;
             if(runThru(c, chck)==true)
@@ -196,7 +207,6 @@ public class MiniSudoku_InTheTerminalWindow{
             System.out.printf(" %s", getAscii(178));
             if(i==1){
                 System.out.printf("\n      %s           %s           %s\n      %s", getAscii(178), getAscii(178), getAscii(178), getAscii(194));
-                //System.out.printf("\n        ");
                 printC_or_I(196, 179);
                 System.out.printf("\n      %s           %s           %s", getAscii(178), getAscii(178), getAscii(178));
             }
@@ -211,6 +221,7 @@ public class MiniSudoku_InTheTerminalWindow{
     }
 
     public static void playGame(String arr[], String arc[]){
+        Scanner sc = new Scanner(System.in);
         gamePrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         double startTime = System.currentTimeMillis();
         outerLoop :
@@ -242,7 +253,16 @@ public class MiniSudoku_InTheTerminalWindow{
                 if(runThru(c1, arc)==false){
                     int x = c1.charAt(1) - 97, y = c1.charAt(0) - 49;
                     System.out.println("Enter the number to replace the selected space/number");
-                    int c = getInputLoop(1, '4').charAt(0) - 48;
+                    int c = sc.nextInt();
+                    try{
+                        for(int trial = 1; trail <= 4)
+                            c = trial;
+                        }
+                    catch(IOException e){
+                        System.out.println("Invalid input");
+                        waitForEnterKey();
+                        continue;}
+                        
                     String temp = arr[y].substring(0,x) + c + arr[y].substring((x+1),4);
                     arr[y]=temp;
                     gamePrint( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
